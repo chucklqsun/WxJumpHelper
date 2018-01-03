@@ -19,6 +19,15 @@ The script uses adb to get the screenshot and calculate the coordination of your
 ## Further work
 Deep Learning version is under development...
 
+## EasterEgg: Use JS script to modify score directly
+install nodejs, execute below steps in wx_t1t_hack.js dir
+1. npm init --y
+2. npm install crypto-js request-promise
+
+replace session id with yours
+(session id could be fetched by fiddle or charles)
+
+
 # (微信小游戏：跳一跳) 辅助程序
 ## 如何使用
 在使用前确保adb程序已经安装并且能在任何路径下执行adb命令
@@ -39,3 +48,12 @@ Deep Learning version is under development...
 
 ## 未来计划
 机器学习（强化学习）版正在开发中，敬请期待...
+
+## 彩蛋：使用脚本直接修改分数
+安装nodejs，在脚本wx_t1t_hack.js目录下执行
+1. npm init --y
+2. npm install crypto-js request-promise
+
+修改脚本wx_t1t_hack.js的senssion_id为你自己的session id
+（session id可以通过fiddle或者charles得到）
+

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from matplotlib.widgets import Cursor
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import subprocess
@@ -13,11 +14,12 @@ def call_cmd(cmd):
 
 
 def onclick(event):
+    global fig
     global click_data
     """Deal with click events"""
-    button = ['left','middle','right']
+    button = ['left', 'middle', 'right']
     toolbar = plt.get_current_fig_manager().toolbar
-    if toolbar.mode!='':
+    if toolbar.mode != '':
         print("You clicked on something, but toolbar is in mode {:s}.".format(toolbar.mode))
     else:
         if len(click_data) < 2:
@@ -31,11 +33,14 @@ def onclick(event):
             distance_2 = pow(click_data[0][0] - click_data[1][0], 2) + pow(click_data[0][1] - click_data[1][1], 2)
             distance = pow(distance_2, 0.5)
             print("Distance is {}".format(distance))
-            delay = int(distance/500*740)
+            delay = int(distance/500*736)
             call_cmd("adb shell input swipe 100 100 100 100 {}".format(delay))
+            plt.pause(0.8)
+            plt.close()
 
 
 def main():
+    global fig
     global click_data
     cmd = [
         'adb shell screencap -p /sdcard/screenshot.png',
@@ -50,7 +55,9 @@ def main():
         screenshot = mpimg.imread('screenshot.png')
         print(screenshot.shape)
 
+        plt.subplots(figsize=(12,10))
         ax = plt.gca()
+        cursor = Cursor(ax, useblit=True, color='red', linewidth=1)
         fig = plt.gcf()
         implot = ax.imshow(screenshot)
         cid = fig.canvas.mpl_connect('button_press_event', onclick)
