@@ -19,7 +19,7 @@ The script uses adb to get the screenshot and calculate the coordination of your
 ## Further work
 Deep Learning version is under development...
 
-# (微信小游戏：挑一挑) 辅助程序
+# (微信小游戏：跳一跳) 辅助程序
 ## 如何使用
 在使用前确保adb程序已经安装并且能在任何路径下执行adb命令
 
