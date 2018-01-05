@@ -42,16 +42,16 @@ var headers = {
     'Content-Type': 'application/json',
     'Accept-Language': 'zh-cn',
     'Accept': '*/*'
-}
+};
 var base_req = {
     'base_req': {
         'session_id': session_id,
         'fast': 1
     }
-}
-var base_site = 'https://mp.weixin.qq.com/wxagame/'
+};
+var base_site = 'https://mp.weixin.qq.com/wxagame/';
 
-var path = 'wxagame_getuserinfo'
+var path = 'wxagame_getuserinfo';
 request({
     method: 'POST',
     url: base_site + path,
@@ -60,9 +60,9 @@ request({
     body: base_req
 }).then(function (response) { 
     // console.log(path, response) 
-})
+});
 
-path = 'wxagame_getfriendsscore'
+path = 'wxagame_getfriendsscore';
 request({
     method: 'POST',
     url: base_site + path,
@@ -80,7 +80,7 @@ request({
         body: extend({}, {version: 9}, base_req)
     }).then(function (response) {
         // console.log(path, response)
-        seed = Date.now();
+        var seed = Date.now();
         var action = [],
             musicList = [],
             touchList = [],
