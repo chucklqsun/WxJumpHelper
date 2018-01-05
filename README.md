@@ -3,8 +3,8 @@
 ## How To Use
 make sure adb is ready for any path
 1. Install matplotlib:
-    for Python 2: pip install matplotlib
-    for Python 3: pip3 install matplotlib
+    * for Python 2: pip install matplotlib
+    * for Python 3: pip3 install matplotlib
 2. Connect your Android phone to your computer and select 'USB for file transfer'.
 3. Open the game and be ready to jump.
 4. Run the main.py and a screenshot will popup shortly.
@@ -22,10 +22,18 @@ Deep Learning version is under development...
 ## EasterEgg: Use JS script to modify score directly
 install nodejs, execute below steps in wx_t1t_hack.js dir
 1. npm init --y
-2. npm install crypto-js request-promise
+2. npm install crypto-js request-promise sleep
 
 replace session id with yours
+modify score and associated i in loop
 (session id could be fetched by fiddle or charles)
+
+Update:
+* referer version：5->6
+* data version: 1->2
+* data format：add fields [steps, timestamp]
+
+[data format](https://github.com/chucklqsun/WxJumpHelper/send_data_format.txt)
 
 
 # (微信小游戏：跳一跳) 辅助程序
@@ -33,8 +41,8 @@ replace session id with yours
 在使用前确保adb程序已经安装并且能在任何路径下执行adb命令
 
 1. 安装matplotlib库:
-    Python 2: pip install matplotlib
-    Python 3: pip3 install matplotlib
+    * Python 2: pip install matplotlib
+    * Python 3: pip3 install matplotlib
 2. 连接你的安卓手机到你电脑上，选择USB文件传送
 3. 启动游戏，进入起跳画面
 4. 运行main.py，游戏截图会自动出现
@@ -52,8 +60,15 @@ replace session id with yours
 ## 彩蛋：使用脚本直接修改分数
 安装nodejs，在脚本wx_t1t_hack.js目录下执行
 1. npm init --y
-2. npm install crypto-js request-promise
+2. npm install crypto-js request-promise sleep
 
 修改脚本wx_t1t_hack.js的senssion_id为你自己的session id
+分数和对应的i的循环次数改成相应大致分数范围
 （session id可以通过fiddle或者charles得到）
 
+更新:
+* referer版本：5->6
+* 数据版本: 1->2
+* 数据格式：添加字段[steps, timestamp]
+
+[数据格式](https://github.com/chucklqsun/WxJumpHelper/send_data_format.txt)

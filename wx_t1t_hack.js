@@ -1,31 +1,11 @@
 var CryptoJS = require('crypto-js')
 var request = require('request-promise')
+var sleep = require('sleep')
 
 /*
- * npm install crypto-js request-promise request
+ * npm install crypto-js request-promise request sleep
  * node wx_t1t_hack.js
  */
-
-// export function testEncription(msg, fullKey) {
-//   var fullKey = fullKey.slice(0, 16)
-//   var key = CryptoJS.enc.Utf8.parse(fullKey)
-//   var iv = CryptoJS.enc.Utf8.parse(fullKey)
-
-//   var passWord = CryptoJS.AES.encrypt(msg, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 })
-//   var base64 = passWord.toString()
-
-//   console.log('passWord', passWord)
-//   console.log('sessionId', sessionId)
-//   console.log('key', key)
-//   console.log('base64', base64)
-
-//   var bytes = CryptoJS.AES.decrypt(base64, key, {
-//     iv: iv
-//   });
-//   console.log('bytes', bytes)
-//   var plaintext = CryptoJS.enc.Utf8.stringify(bytes);
-//   console.log('plaintext', plaintext)
-// }
 
 function encrypt (text, originKey) {
     var originKey = originKey.slice(0, 16),
@@ -62,8 +42,8 @@ function extend (target) {
 }
 
 
-var version = 5,
-    score = Math.round(10000+Math.random()*2000),
+var version = 6,
+    score = Math.round(512+Math.random()*20),
     // replace with your session_id here
     session_id = 'xxxxxxxx'
 
@@ -101,7 +81,6 @@ request({
     json: true,
     body: base_req
 }).then(function (response) {
-    // console.log(response.my_user_info)
     var times = response.my_user_info.times + 1
     path = 'wxagame_init'
     request({
@@ -112,28 +91,40 @@ request({
         body: extend({}, {version: 9}, base_req)
     }).then(function (response) {
         // console.log(path, response)
+        seed = Date.now();
         var action = [],
             musicList = [],
-            touchList = []
-        for(var i=Math.round(12000+Math.random()*2000);i>0;i--){
-            action.push([Math.random().toFixed(3),(Math.random()*2).toFixed(2),i/5000==0?true:false]);
+            touchList = [],
+            steps = [],
+            timestamp = []
+        for(var i=Math.round(20+Math.random()*2);i>0;i--){
+            console.log(i);
+            duration = Math.random().toFixed(3);
+            holdTime = (Math.random()*2).toFixed(2);
+            delta = duration*1000+holdTime*1000;
+            action.push([duration,holdTime,i/8==0?true:false]);
             musicList.push(false);
-            touchList.push([(250-Math.random()*10).toFixed(4),(670-Math.random()*20).toFixed(4)]);
+            touch_x = (250-Math.random()*10).toFixed(4);
+            touch_y= (670-Math.random()*20).toFixed(4);
+            touchList.push([touch_x, touch_y]);
+            step = []
+            step.push(touch_x);
+            step.push(touch_y);
+            steps.push(step);
+            sleep.msleep(delta)
+            timestamp.push(Date.now())
         }
-        //for (var i = 0; i < score; i++) {
-        //    action.push([0.752, 1.32, false])
-        //    musicList.push(false)
-        //    touchList.push([185, 451])
-        //}
         var data = {
             score: score,
             times: times,
             game_data: JSON.stringify({
-                seed: Date.now(),
+                seed: seed,
                 action: action,
                 musicList: musicList,
                 touchList: touchList,
-                version: 1
+                steps : steps,
+                timestamp: timestamp,
+                version: 2
             })
         }
         path = 'wxagame_settlement'
@@ -151,5 +142,6 @@ request({
         })
     })
 }).catch(function (error) {
+    console.log(error)
     console.log('something crash')
 })
