@@ -33,7 +33,7 @@ Update:
 * data version: 1->2
 * data format：add fields [steps, timestamp]
 
-[data format](https://github.com/chucklqsun/WxJumpHelper/send_data_format.txt)
+[data format](https://github.com/chucklqsun/WxJumpHelper/blob/master/send_data_format.txt)
 
 
 # (微信小游戏：跳一跳) 辅助程序
@@ -71,4 +71,4 @@ Update:
 * 数据版本: 1->2
 * 数据格式：添加字段[steps, timestamp]
 
-[数据格式](https://github.com/chucklqsun/WxJumpHelper/send_data_format.txt)
+[数据格式](https://github.com/chucklqsun/WxJumpHelper/blob/master/send_data_format.txt)
