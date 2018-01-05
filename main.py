@@ -3,6 +3,7 @@ from matplotlib.widgets import Cursor
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import subprocess
+import random
 
 
 click_data = []
@@ -34,7 +35,11 @@ def onclick(event):
             distance = pow(distance_2, 0.5)
             print("Distance is {}".format(distance))
             delay = int(distance/500*736)
-            call_cmd("adb shell input swipe 100 100 100 100 {}".format(delay))
+            x1 = random.randint(100, 500)
+            y1 = random.randint(100, 500)
+            x2 = random.randint(100, 500)
+            y2 = random.randint(100, 500)
+            call_cmd("adb shell input swipe {} {} {} {} {}".format(x1, y1, x2, y2, delay))
             plt.pause(0.8)
             plt.close()
 
