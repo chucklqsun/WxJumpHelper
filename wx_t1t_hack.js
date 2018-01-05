@@ -1,6 +1,6 @@
-var CryptoJS = require('crypto-js')
-var request = require('request-promise')
-var sleep = require('sleep')
+var CryptoJS = require('crypto-js');
+var request = require('request-promise');
+var sleep = require('sleep');
 
 /*
  * npm install crypto-js request-promise request sleep
@@ -8,10 +8,10 @@ var sleep = require('sleep')
  */
 
 function encrypt (text, originKey) {
-    var originKey = originKey.slice(0, 16),
-        key = CryptoJS.enc.Utf8.parse(originKey),
+    originKey = originKey.slice(0, 16);
+    var key = CryptoJS.enc.Utf8.parse(originKey),
         iv = CryptoJS.enc.Utf8.parse(originKey),
-        msg = JSON.stringify(text)
+        msg = JSON.stringify(text);
     var ciphertext = CryptoJS.AES.encrypt(msg, key, {
         iv: iv,
         mode: CryptoJS.mode.CBC,
@@ -20,32 +20,21 @@ function encrypt (text, originKey) {
     return ciphertext.toString()
 }
 
-function decrypt (text, originKey) {
-    var originKey = originKey.slice(0, 16),
-        key = CryptoJS.enc.Utf8.parse(originKey),
-        iv = CryptoJS.enc.Utf8.parse(originKey)
-    var bytes = CryptoJS.AES.decrypt(text, key, {
-        iv: iv
-    })
-    var plaintext = CryptoJS.enc.Utf8.stringify(bytes)
-    return plaintext
-}
-
 function extend (target) {
-    var sources = [].slice.call(arguments, 1)
+    var sources = [].slice.call(arguments, 1);
     sources.forEach(function (source) {
         for (var prop in source) {
             target[prop] = source[prop]
         }
-    })
+    });
     return target
 }
 
-
+var score_you_want = 218;
 var version = 6,
-    score = Math.round(512+Math.random()*20),
+    score = Math.round(score_you_want+Math.random()*20),
     // replace with your session_id here
-    session_id = 'xxxxxxxx'
+    session_id = 'xxxxxxxx';
 
 var headers = {
     'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_2_1 like Mac OS X) AppleWebKit/604.4.7 (KHTML, like Gecko) Mobile/15C153 MicroMessenger/6.6.1 NetType/WIFI Language/zh_CN',
@@ -81,8 +70,8 @@ request({
     json: true,
     body: base_req
 }).then(function (response) {
-    var times = response.my_user_info.times + 1
-    path = 'wxagame_init'
+    var times = response.my_user_info.times + 1,
+        path = 'wxagame_init';
     request({
         method: 'POST',
         url: base_site + path,
@@ -96,22 +85,22 @@ request({
             musicList = [],
             touchList = [],
             steps = [],
-            timestamp = []
-        for(var i=Math.round(20+Math.random()*2);i>0;i--){
+            timestamp = [];
+        for(var i=Math.round(score_you_want+Math.random()*20);i>0;i--){
             console.log(i);
-            duration = Math.random().toFixed(3);
-            holdTime = (Math.random()*2).toFixed(2);
-            delta = duration*1000+holdTime*1000;
-            action.push([duration,holdTime,i/8==0?true:false]);
+            var duration = Math.random().toFixed(3);
+            var holdTime = (Math.random()*2).toFixed(2);
+            var delta = duration*1000+holdTime*1000;
+            action.push([duration,holdTime,i%8===0]);
             musicList.push(false);
-            touch_x = (250-Math.random()*10).toFixed(4);
-            touch_y= (670-Math.random()*20).toFixed(4);
+            var touch_x = (250-Math.random()*10).toFixed(4);
+            var touch_y= (670-Math.random()*20).toFixed(4);
             touchList.push([touch_x, touch_y]);
-            step = []
+            var step = [];
             step.push(touch_x);
             step.push(touch_y);
             steps.push(step);
-            sleep.msleep(delta)
+            sleep.msleep(delta);
             timestamp.push(Date.now())
         }
         var data = {
@@ -126,8 +115,8 @@ request({
                 timestamp: timestamp,
                 version: 2
             })
-        }
-        path = 'wxagame_settlement'
+        };
+        path = 'wxagame_settlement';
         request({
             method: 'POST',
             url: base_site + path,
@@ -135,13 +124,13 @@ request({
             json: true,
             body: extend({}, {action_data: encrypt(data, session_id)}, base_req)
         }).then(function (response) {
-            console.log(path, response)
+            console.log(path, response);
             console.log('2018! Happy new year! 🎉')
         }).catch(function (error) {
             console.log(error)
         })
     })
 }).catch(function (error) {
-    console.log(error)
+    console.log(error);
     console.log('something crash')
-})
+});
