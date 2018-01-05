@@ -20,6 +20,8 @@ The script uses adb to get the screenshot and calculate the coordination of your
 Deep Learning version is under development...
 
 ## EasterEgg: Use JS script to modify score directly
+[original source](https://gist.github.com/feix/6dd1f62a54c5efa10f1e1c24f8efc417)
+
 install nodejs, execute below steps in wx_t1t_hack.js dir
 1. npm init --y
 2. npm install crypto-js request-promise sleep
@@ -35,6 +37,8 @@ Update:
 
 [data format](https://github.com/chucklqsun/WxJumpHelper/blob/master/send_data_format.txt)
 
+### Warning
+Please do not post score over 1000, otherwise you have risk, such as ban!
 
 # (微信小游戏：跳一跳) 辅助程序
 ## 如何使用
@@ -58,6 +62,8 @@ Update:
 机器学习（强化学习）版正在开发中，敬请期待...
 
 ## 彩蛋：使用脚本直接修改分数
+[原始代码](https://gist.github.com/feix/6dd1f62a54c5efa10f1e1c24f8efc417)
+
 安装nodejs，在脚本wx_t1t_hack.js目录下执行
 1. npm init --y
 2. npm install crypto-js request-promise sleep
@@ -65,6 +71,10 @@ Update:
 修改脚本wx_t1t_hack.js的senssion_id为你自己的session id
 分数和对应的i的循环次数改成相应大致分数范围
 （session id可以通过fiddle或者charles得到）
+
+### 注意
+据观察，目前上万的用户会被关小黑屋（其他用户不可见你的分数），上千的也有被ban的可能。
+不知道是因为数据不可信还是分数太高本身的原因，玩家务必控制分数在三位数。
 
 更新:
 * referer版本：5->6
