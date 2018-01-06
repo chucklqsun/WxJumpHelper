@@ -93,9 +93,9 @@ request({
         for(var i=score;i>0;i--){
             console.log(i);
             var duration = Math.random().toFixed(getRandomInt(2,3));
-            var holdTime = (Math.random()*2).toFixed(2);
-            var delta = duration*1000+holdTime*1000;
-            action.push([duration,holdTime,false]);
+            var calY = (-1.9932*duration+2.7486).toFixed(2);
+            var delta = duration*1000+calY*1000;
+            action.push([duration,calY,false]); //false for quick, which < 800ms between 2 steps
             musicList.push(false);
             var touch_x = (150-Math.random()*20).toFixed(getRandomInt(0,3));
             var touch_y= (370-Math.random()*30).toFixed(getRandomInt(0,3));
