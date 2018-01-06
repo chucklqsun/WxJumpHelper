@@ -35,12 +35,12 @@ def onclick(event):
             distance = pow(distance_2, 0.5)
             print("Distance is {}".format(distance))
             delay = int(distance/500*736)
-            x1 = random.randint(100, 500)
-            y1 = random.randint(100, 500)
-            x2 = random.randint(100, 500)
-            y2 = random.randint(100, 500)
+            x1 = round(random.randint(100, 500)+random.random(), 3)
+            y1 = round(random.randint(100, 500)+random.random(), 3)
+            x2 = round(x1+random.random(), 3)
+            y2 = round(y1+random.random(), 3)
             call_cmd("adb shell input swipe {} {} {} {} {}".format(x1, y1, x2, y2, delay))
-            plt.pause(0.8)
+            plt.pause(0.9)
             plt.close()
 
 

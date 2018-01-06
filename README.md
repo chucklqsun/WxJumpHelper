@@ -22,6 +22,13 @@ Deep Learning version is under development...
 ## EasterEgg: Use JS script to modify score directly
 [original source](https://gist.github.com/feix/6dd1f62a54c5efa10f1e1c24f8efc417)
 
+**Windows User**
+before "npm install sleep", please install windows-build-tools first(which is sometimes not useful)
+```
+npm install --global --production windows-build-tools
+```
+You can also delete "sleep" related code(but have big risk if server verifies timestamp)
+
 install nodejs, execute below steps in wx_t1t_hack.js dir
 1. npm init --y
 2. npm install crypto-js request-promise sleep
@@ -67,6 +74,13 @@ Please do not post score over 1000, otherwise you have risk, such as ban!
 安装nodejs，在脚本wx_t1t_hack.js目录下执行
 1. npm init --y
 2. npm install crypto-js request-promise sleep
+
+**Windows用户**
+npm install sleep 在windows需要额外安装编译套件并且不保证成功
+```
+npm install --global --production windows-build-tools
+```
+也可以删除sleep相关代码(如果服务器校验timestamp，风险会很大)。
 
 修改脚本wx_t1t_hack.js的senssion_id为你自己的session id
 分数和对应的i的循环次数改成相应大致分数范围

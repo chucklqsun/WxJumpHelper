@@ -6,6 +6,9 @@ var sleep = require('sleep');
  * npm install crypto-js request-promise request sleep
  * node wx_t1t_hack.js
  */
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 function encrypt (text, originKey) {
     originKey = originKey.slice(0, 16);
@@ -70,6 +73,7 @@ request({
     json: true,
     body: base_req
 }).then(function (response) {
+    console.log(response);
     var times = response.my_user_info.times + 1,
         path = 'wxagame_init';
     request({
@@ -86,19 +90,21 @@ request({
             touchList = [],
             steps = [],
             timestamp = [];
-        for(var i=Math.round(score_you_want+Math.random()*20);i>0;i--){
+        for(var i=score;i>0;i--){
             console.log(i);
-            var duration = Math.random().toFixed(3);
+            var duration = Math.random().toFixed(getRandomInt(2,3));
             var holdTime = (Math.random()*2).toFixed(2);
             var delta = duration*1000+holdTime*1000;
-            action.push([duration,holdTime,i%8===0]);
+            action.push([duration,holdTime,false]);
             musicList.push(false);
-            var touch_x = (250-Math.random()*10).toFixed(4);
-            var touch_y= (670-Math.random()*20).toFixed(4);
-            touchList.push([touch_x, touch_y]);
+            var touch_x = (150-Math.random()*20).toFixed(getRandomInt(0,3));
+            var touch_y= (370-Math.random()*30).toFixed(getRandomInt(0,3));
+            touchList.push([parseFloat(touch_x), parseFloat(touch_y)]);
             var step = [];
-            step.push(touch_x);
-            step.push(touch_y);
+            for(var s =0;s<5;++s) {
+                step.push(parseFloat(touch_x));
+                step.push(parseFloat(touch_y));
+            }
             steps.push(step);
             sleep.msleep(delta);
             timestamp.push(Date.now())
@@ -116,6 +122,7 @@ request({
                 version: 2
             })
         };
+        console.log(data);
         path = 'wxagame_settlement';
         request({
             method: 'POST',
