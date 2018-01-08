@@ -1,5 +1,5 @@
 # screenshot file
-*.png
+screenshot.png
 .idea
 
 # Byte-compiled / optimized / DLL files
