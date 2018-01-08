@@ -33,7 +33,9 @@ function extend (target) {
     return target
 }
 
-function wxagame_bottlereport(game_over, best_score, times){
+function wxagame_bottlereport(game_start, game_over, best_score, times){
+    game_start = Math.floor(game_start/1000);
+    game_over = Math.floor(game_over/1000);
     console.log("begin bottle report");
     var data = {
         base_req: {
@@ -48,18 +50,18 @@ function wxagame_bottlereport(game_over, best_score, times){
         },
         report_list : []
     };
-    var duration = getRandomInt(1,40);
-    var duration2 = getRandomInt(1,40);
+    var duration = getRandomInt(1,10);
+    var duration2 = getRandomInt(1,10);
 
     var t = {
-        ts: game_over-duration-duration2,
+        ts: game_start-duration-duration2,
         type: 0,
         scene: 1089
     };
     data.report_list.push(t);
 
     t = {
-        ts: game_over-duration2,
+        ts: game_start-duration2,
         type: 10
     };
     data.report_list.push(t);
@@ -72,6 +74,14 @@ function wxagame_bottlereport(game_over, best_score, times){
         break_record: score > best_score ? 1:0,
         duration: duration2,
         times: times
+    };
+    data.report_list.push(t);
+
+    var quitReportTime = Math.floor(Date.now()/1000);
+    t = {
+        ts : quitReportTime,
+        type: 1,
+        duration: quitReportTime - game_over
     };
     data.report_list.push(t);
 
@@ -98,6 +108,7 @@ function wxagame_settlement(best_score,times){
         touchList = [],
         steps = [],
         timestamp = [];
+    var game_over = 0;
     for(var i=score;i>0;i--){
         console.log(i);
         var duration = Math.random().toFixed(getRandomInt(2,3));
@@ -115,9 +126,10 @@ function wxagame_settlement(best_score,times){
         }
         steps.push(step);
         sleep.msleep(delta);
-        timestamp.push(Date.now())
+        game_over = Date.now();
+        timestamp.push(game_over)
     }
-    wxagame_bottlereport(Date.now(),best_score,times);
+    wxagame_bottlereport(seed, game_over, best_score, times);
     var data = {
         score: score,
         times: times,
@@ -147,7 +159,7 @@ function wxagame_settlement(best_score,times){
     })
 }
 
-var score_you_want = 218;
+var score_you_want = 10; //replace with the score you want post
 var version = 6,
     score = Math.round(score_you_want+Math.random()*20),
     // replace with your session_id here
