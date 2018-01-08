@@ -34,8 +34,11 @@ install nodejs, execute below steps in wx_t1t_hack.js dir
 2. npm install crypto-js request-promise sleep
 
 replace session id with yours
-modify score and associated i in loop
+modify score_you_want
 (session id could be fetched by fiddle or charles)
+
+### Run & Enjoy
+node wx_t1t_hack.js
 
 Update:
 * referer version：5->6
@@ -83,8 +86,11 @@ npm install --global --production windows-build-tools
 也可以删除sleep相关代码(如果服务器校验timestamp，风险会很大)。
 
 修改脚本wx_t1t_hack.js的senssion_id为你自己的session id
-分数和对应的i的循环次数改成相应大致分数范围
+分数score_you_want
 （session id可以通过fiddle或者charles得到）
+
+### 运行 & 玩的开心
+node wx_t1t_hack.js
 
 ### 注意
 据观察，目前上万的用户会被关小黑屋（其他用户不可见你的分数），上千的也有被ban的可能。
