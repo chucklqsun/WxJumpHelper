@@ -8,6 +8,7 @@ import matplotlib.patches as patches
 
 click_data = []
 
+
 def call_cmd(cmd):
     s = subprocess.check_output(cmd.split())
     return s.decode("utf-8").split('\n')
@@ -51,7 +52,8 @@ def onclick(event):
                          (click_data[0][1] - click_data[1][1])*(click_data[0][1] - click_data[1][1])
             distance = pow(distance_2, 0.5)
             print("Distance is {}".format(distance))
-            delay = int(distance/540*806)
+            # delay = int(distance/540*806)
+            delay = int(distance/540*780)   # change to your value properly
             x1 = round(random.randint(100, 500)+random.random(), 3)
             y1 = round(random.randint(100, 500)+random.random(), 3)
             x2 = round(x1+random.random(), 3)

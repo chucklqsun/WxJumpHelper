@@ -51,7 +51,8 @@ Update:
 [data format](https://github.com/chucklqsun/WxJumpHelper/blob/master/send_data_format.txt)
 
 ### Warning
-Please do not post score over 1000, otherwise you have risk, such as ban!
+* Please do not post score over 1000, otherwise you have risk, such as ban!
+* Please do not increase your history best dramatically.
 
 # (微信小游戏：跳一跳) 辅助程序
 ## 如何使用
@@ -99,8 +100,9 @@ npm install --global --production windows-build-tools
 node wx_t1t_hack.js
 
 ### 注意
-据观察，目前上万的用户会被关小黑屋（其他用户不可见你的分数），上千的也有被ban的可能。
-不知道是因为数据不可信还是分数太高本身的原因，玩家务必控制分数在三位数。
+* 据观察，目前上万的用户会被关小黑屋（其他用户不可见你的分数），上千的也有被ban的可能。
+* 不知道是因为数据不可信还是分数太高本身的原因，玩家务必控制分数在三位数。
+* 另外让自己的分数变化太陡峭，历史分数突然大幅变化会引起封号。
 
 更新:
 * referer版本：5->6
