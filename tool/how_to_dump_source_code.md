@@ -43,7 +43,7 @@ $ mount -o remount,rw /data
 此时就可以将当前目录下的文件拷贝到 sdcard 中
 
 $ cd /data/data/com.tencent.mm/MicroMsg/{User}/appbrand/pkg/_1079392110_5.wxapkg /mnt/sdcard
-然后将 _1079392110_5.wxapkg 文件拷贝到电脑里，通过该脚本进行解压后，即为其源码
+然后将 _1079392110_5.wxapkg 文件拷贝到电脑里，通过脚本unwxapkg.py进行解压后，即为其源码
 
 ## 编译源码
 通过微信小游戏开发工具新建一个空白的小程序或者小游戏的项目，主要不要选择快速启动模板

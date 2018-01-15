@@ -102,7 +102,7 @@ node wx_t1t_hack.js
 ### 注意
 * 据观察，目前上万的用户会被关小黑屋（其他用户不可见你的分数），上千的也有被ban的可能。
 * 不知道是因为数据不可信还是分数太高本身的原因，玩家务必控制分数在三位数。
-* 另外让自己的分数变化太陡峭，历史分数突然大幅变化会引起封号。
+* 另外让自己的分数变化太陡峭，历史分数突然大幅变化会引起封号。(官方已经表态，学习曲线会被反外挂参考，很重要)
 
 更新:
 * referer版本：5->6
@@ -110,5 +110,13 @@ node wx_t1t_hack.js
 * 数据格式：添加字段[steps, timestamp]
 
 [数据格式](https://github.com/chucklqsun/WxJumpHelper/blob/master/send_data_format.txt)
+
+## 又一个彩蛋（大家来找茬腾讯版）
+这个游戏暂时没有开发出特别好用的辅助，就先放这个项目下，供大家参考研究。
+* zhaocha_tencent/test.js用来抓取这游戏里的原图，resID就是游戏里每关的图片ID,会保存在resID.png。仅供研究使用。
+* main.py是游戏开始后，截取安卓手机的屏幕，自动识别不同点后，在电脑上显示标记好的图片。(缺点是速度不够快，仅供研究用)
+
+## 头脑王者辅助（敬请期待）
+
 
 [bottle]: https://github.com/chucklqsun/WxJumpHelper/raw/master/imgs/bottle.png "Bottle"
