@@ -5,10 +5,11 @@ make sure adb is ready for any path
 1. Install matplotlib:
     * for Python 2: pip install matplotlib
     * for Python 3: pip3 install matplotlib
-2. Connect your Android phone to your computer and select 'USB for file transfer'.
-3. Open the game and be ready to jump.
-4. Run the main.py and a screenshot will popup shortly.
-5. Click the character bottom center and then click the destination center.
+2. Install OpenCV
+3. Connect your Android phone to your computer and select 'USB for file transfer'.
+4. Open the game and be ready to jump.
+5. Run the main.py and a screenshot will popup shortly.
+6. Click click the destination center.
 
 ![alt text][bottle]
 
@@ -64,7 +65,7 @@ Update:
 2. 连接你的安卓手机到你电脑上，选择USB文件传送
 3. 启动游戏，进入起跳画面
 4. 运行main.py，游戏截图会自动出现
-5. 点击角色的底部中间，然后再点击需要跳到的地方的位置
+5. 点击需要跳到的地方的位置
 
 ![alt text][bottle]
 
