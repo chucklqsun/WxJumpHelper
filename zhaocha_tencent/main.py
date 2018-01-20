@@ -5,6 +5,7 @@ import subprocess
 import time
 
 debug = False
+mode = 1  # 0:fight, 1: daily/challenge
 
 
 def call_cmd(cmd):
@@ -20,13 +21,16 @@ def diff_value(v1, v2, tol):
 
 
 def main():
-    tolerance = 0.11
-    step = 4
     cmd = [
         # 'adb shell screencap -p /sdcard/screenshot.png',
         'adb shell screencap /sdcard/screenshot.png',
         'adb pull /sdcard/screenshot.png',
     ]
+    step = 4
+    height = 830
+    width = height
+    tolerance = 0.11
+
     while True:
         plt.close()
         start = time.clock()
@@ -36,19 +40,23 @@ def main():
             call_cmd(cmd[1])
             filename = 'screenshot.png'
         else:
-            filename = '12836.png'
-            # filename = 'screenshot.png'
+            # filename = '12836.png'
+            filename = 'screenshot.png'
 
         screenshot = mpimg.imread(filename)
         print(screenshot.shape)  # y, x
         center = [int(screenshot.shape[0]/2), int(screenshot.shape[1]/2)]
 
-        height = 830
-        width = 830
-        offset_x1 = 72
-        offset_y1 = 35
-        offset_x2 = 72
-        offset_y2 = 35
+        if mode == 0:       # top-left: 2/2,bottom-left:2/3
+            offset_x1 = 72
+            offset_y1 = 35
+            offset_x2 = offset_x1
+            offset_y2 = offset_y1
+        elif mode == 1:
+            offset_x1 = 87
+            offset_y1 = -34
+            offset_x2 = offset_x1
+            offset_y2 = 65
 
         output_img1 = np.zeros([height, width, screenshot.shape[2]])
         output_img2 = np.zeros([height, width, screenshot.shape[2]])
@@ -71,18 +79,19 @@ def main():
                         diff_value(output_img1[i, j][2], output_img2[i, j][2], tolerance):
                     for k in range(-step, 1):
                         for m in range(-step, 1):
-                            output_img2[i, j][0] = 255/255
-                            output_img2[i, j][1] = 244/255
-                            output_img2[i, j][2] = 8/255
-                            output_img2[i+k, j][0] = 255/255
-                            output_img2[i+k, j][1] = 244/255
-                            output_img2[i+k, j][2] = 8/255
-                            output_img2[i, j+m][0] = 255/255
-                            output_img2[i, j+m][1] = 244/255
-                            output_img2[i, j+m][2] = 8/255
-                            output_img2[i+k, j+m][0] = 255/255
-                            output_img2[i+k, j+m][1] = 244/255
-                            output_img2[i+k, j+m][2] = 8/255
+                            if 1:
+                                output_img2[i, j][0] = 255/255
+                                output_img2[i, j][1] = 244/255
+                                output_img2[i, j][2] = 8/255
+                                output_img2[i+k, j][0] = 255/255
+                                output_img2[i+k, j][1] = 244/255
+                                output_img2[i+k, j][2] = 8/255
+                                output_img2[i, j+m][0] = 255/255
+                                output_img2[i, j+m][1] = 244/255
+                                output_img2[i, j+m][2] = 8/255
+                                output_img2[i+k, j+m][0] = 255/255
+                                output_img2[i+k, j+m][1] = 244/255
+                                output_img2[i+k, j+m][2] = 8/255
 
         plt.subplots(figsize=(10, 8))
         ax = plt.gca()
