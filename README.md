@@ -1,6 +1,17 @@
 # WxJumpHelper
 
 ## How To Use
+setup below variable in code:
+
+```
+for i in range(0, 5):   # default jump 5 rounds
+    learning_seq.append(random.randint(50, 110))
+```
+
+default is 5 rounds and jump times (random int) between 50 to 110。You properly get
+your score over 700. User should use lower jump times and increase them later to
+form a learning curve.
+
 make sure adb is ready for any path
 1. Install matplotlib:
     * for Python 2: pip install matplotlib
@@ -9,16 +20,14 @@ make sure adb is ready for any path
 3. Connect your Android phone to your computer and select 'USB for file transfer'.
 4. Open the game and be ready to jump.
 5. Run the main.py and a screenshot will popup shortly.
-6. Click click the destination center.
 
 ![alt text][bottle]
 
 6. The character will jump automatically.
-7. Close the screenshot window and ready for another jump.
-8. Enjoy!
+7. Enjoy!
 
 ## How It Works
-The script uses adb to get the screenshot and calculate the coordination of your two click(start point and stop point) and give a proper jumping
+The script uses adb to get the screenshot and calculate the coordination (start point and stop point) and give a proper jumping
 
 ## Further work
 Deep Learning version is under development...
@@ -45,6 +54,8 @@ modify score_you_want
 node wx_t1t_hack.js
 
 Update:
+* 100% automation and support simulating of learning curve
+---------------------
 * referer version：5->6
 * data version: 1->2
 * data format：add fields [steps, timestamp]
@@ -54,27 +65,36 @@ Update:
 ### Warning
 * Please do not post score over 1000, otherwise you have risk, such as ban!
 * Please do not increase your history best dramatically.
+* wx_t1t_hack.js will not be updated in this project, please use it at discretion.
 
 # (微信小游戏：跳一跳) 辅助程序
 ## 如何使用
 在使用前确保adb程序已经安装并且能在任何路径下执行adb命令
+在一下代码里配置跳跃的参数:
+
+```
+for i in range(0, 5):   # default jump 5 rounds
+    learning_seq.append(random.randint(50, 110))
+```
+
+默认是跳五轮，每轮跳跃次数在50,110之间的随机整数，分数大概会有七百分的样子。用户可以先降低
+随机的范围，比如说(20,50)来模拟新手，然后逐步提高，形成学习曲线。
 
 1. 安装matplotlib库:
     * Python 2: pip install matplotlib
     * Python 3: pip3 install matplotlib
-2. 连接你的安卓手机到你电脑上，选择USB文件传送
-3. 启动游戏，进入起跳画面
-4. 运行main.py，游戏截图会自动出现
-5. 点击需要跳到的地方的位置
+2. 安装opencv
+3. 连接你的安卓手机到你电脑上，选择USB文件传送
+4. 启动游戏，进入起跳画面
+5. 运行main.py，游戏截图会自动出现
 
 ![alt text][bottle]
 
 6. 自动开始起跳
-7. 关闭截图窗口，进入下一次起跳阶段
-8. 玩的开心！
+7. 玩的开心！
 
 ## 工作原理
-脚本用adb获取屏幕截图并计算鼠标两次点击的距离，换算成起跳时间
+脚本用adb获取屏幕截图并计算瓶子和目标物体中心的距离，换算成起跳时间
 
 ## 未来计划
 机器学习（强化学习）版正在开发中，敬请期待...
@@ -104,8 +124,11 @@ node wx_t1t_hack.js
 * 据观察，目前上万的用户会被关小黑屋（其他用户不可见你的分数），上千的也有被ban的可能。
 * 不知道是因为数据不可信还是分数太高本身的原因，玩家务必控制分数在三位数。
 * 另外让自己的分数变化太陡峭，历史分数突然大幅变化会引起封号。(官方已经表态，学习曲线会被反外挂参考，很重要)
+* 本项目中，wx_t1t_hack.js已经停止更新，被封号的可能性会很大，请酌情使用。
 
 更新:
+* 实现完全自动化和模拟学习曲线
+---------------------
 * referer版本：5->6
 * 数据版本: 1->2
 * 数据格式：添加字段[steps, timestamp]
@@ -118,6 +141,7 @@ node wx_t1t_hack.js
 * main.py是游戏开始后，截取安卓手机的屏幕，自动识别不同点后，在电脑上显示标记好的图片。(缺点是速度不够快，仅供研究用)
 
 ## 头脑王者辅助（敬请期待）
+抓取题库和答案的脚本brain/main.py会被封号。
 
 
 [bottle]: https://github.com/chucklqsun/WxJumpHelper/raw/master/imgs/bottle.png "Bottle"
