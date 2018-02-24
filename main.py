@@ -6,6 +6,9 @@ import matplotlib.image as mpimg
 import subprocess
 import random
 import matplotlib.patches as patches
+import time
+from os.path import isfile
+import shutil
 
 click_data = []
 debug = False
@@ -58,7 +61,7 @@ def jump(self_kill=False):
     distance = pow(distance_2, 0.5)
     print("Distance is {}".format(distance))
     # delay = int(distance/540*806)
-    delay = int(distance / 540 * 755)  # change to your value properly
+    delay = int(distance / 540 * 1100)  # change to your value properly, 1080*1920=>755
     x1 = round(random.randint(100, 500) + random.random(), 3)
     y1 = round(random.randint(100, 500) + random.random(), 3)
     x2 = round(x1 + random.random(), 3)
@@ -69,7 +72,7 @@ def jump(self_kill=False):
     call_cmd("adb shell input swipe {} {} {} {} {}".format(x1, y1, x2, y2, delay))
     plt.pause(1.2)
     plt.close()
-    return
+    return delay
 
 
 # def onclick(event):
@@ -155,7 +158,14 @@ def main():
         if cur_jump_count < learning_seq[learning_idx]:
             print("to jump")
             cur_jump_count += 1
-            jump()
+            delay = jump()
+
+            # collect data and label delay on filename
+            save_dir = "/Users/bartowski/tmp/data/wxjump"
+            save_file_path = "{}/{}_{}.png".format(save_dir, int(time.time()), delay)
+            if isfile("screenshot.png"):
+                shutil.copyfile("screenshot.png", save_file_path)
+
         elif cur_jump_count == learning_seq[learning_idx]:
             print("to self KILL")
             cur_jump_count += 1
