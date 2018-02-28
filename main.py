@@ -10,9 +10,17 @@ import time
 from os.path import isfile
 import shutil
 
+coefficient = 1.5   # modify for your resolution, e.g. 1280 to 1920 is x1.5, 1920 to 1920 is x1.0
 click_data = []
 debug = False
 rr = None
+
+
+def get_height():
+    info = call_cmd("adb shell wm size")
+    height = info[0].split("x")[1]
+    print("Height {}".format(height))
+    return height
 
 
 def call_cmd(cmd):
@@ -24,13 +32,13 @@ def get_object_center(img, bottle_filter):
     pin_point = []
     for i in range(int(len(img)/5), int(len(img)*2/3)):
         for j in range(100, len(img[i])-100):
-            if img[i][j] != 0 and (j < (bottle_filter[0]-5) or j > (bottle_filter[0]+90)):
+            if img[i][j] != 0 and (j < (bottle_filter[0]-5) or j > (bottle_filter[0]+int(90/coefficient))):
                 # print("%s,%s,%s" % (i, j, img[i][j]))
                 pin_point.append([j, i])
         if len(pin_point) > 0:
             break
-    center_top = [int((pin_point[0][0] + pin_point[-1][0])/2), pin_point[0][1] ]
-    center = [center_top[0], center_top[1]+80]
+    center_top = [int((pin_point[0][0] + pin_point[-1][0])/2), pin_point[0][1]]
+    center = [center_top[0], center_top[1]+int(80/coefficient)]
     # supposed border width is 5 pix
     # for i in range(center_top[1]+5, int(len(img)*2/3)):
     #     if img[i, center_top[0]] == 255:
@@ -61,7 +69,7 @@ def jump(self_kill=False):
     distance = pow(distance_2, 0.5)
     print("Distance is {}".format(distance))
     # delay = int(distance/540*806)
-    delay = int(distance / 540 * 1100)  # change to your value properly, 1080*1920=>755
+    delay = int(distance / 540 * (755*coefficient))  # change to your value properly, 1080*1920=>755
     x1 = round(random.randint(100, 500) + random.random(), 3)
     y1 = round(random.randint(100, 500) + random.random(), 3)
     x2 = round(x1 + random.random(), 3)
@@ -93,6 +101,8 @@ def jump(self_kill=False):
 
 
 def main():
+    global coefficient
+    coefficient = 1920/int(get_height())
     learning_seq = []
     # 30-80: 240
     # 50-110:730
@@ -123,16 +133,18 @@ def main():
         # imread()函数读取目标图片和模板
         img_rgb = cv2.imread("screenshot.png", 0)
         template = cv2.imread('bottle.png', 0)
+        template = cv2.resize(template, None, fx=1/coefficient, fy=1/coefficient, interpolation=cv2.INTER_CUBIC)
 
         # matchTemplate 函数：在模板和输入图像之间寻找匹配,获得匹配结果图像
         # minMaxLoc 函数：在给定的矩阵中寻找最大和最小值，并给出它们的位置
         res = cv2.matchTemplate(img_rgb, template, cv2.TM_CCOEFF_NORMED)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
         print("%s,%s,%s,%s" % (min_val, max_val, min_loc, max_loc))
-        bottle_center = [max_loc[0]+40, max_loc[1]+185]
+        bottle_center = [max_loc[0]+int(40/coefficient), max_loc[1]+int(185/coefficient)]
         click_data.append(bottle_center)
 
-        plt.subplots(figsize=(6, 5))
+        # plt.subplots(figsize=(6, 5))
+        plt.subplots(figsize=(0, 0))
         ax = plt.gca()
         fig = plt.gcf()
 
@@ -171,12 +183,13 @@ def main():
             cur_jump_count += 1
             jump(self_kill=True)
         else:
-            plt.pause(5)
+            plt.pause(10)
             print("to restart")
             cur_jump_count = 0
             learning_idx += 1
             # restart game
-            call_cmd("adb shell input tap %s %s" % (random.randint(400, 700), random.randint(1500, 1600)))
+            call_cmd("adb shell input tap %s %s" % (random.randint(int(400/coefficient), int(700/coefficient)),
+                                                    random.randint(int(1500/coefficient), int(1600/coefficient))))
             plt.pause(5)
             plt.close()
         plt.show()

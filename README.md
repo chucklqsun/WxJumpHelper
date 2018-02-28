@@ -29,8 +29,9 @@ make sure adb is ready for any path
 ## How It Works
 The script uses adb to get the screenshot and calculate the coordination (start point and stop point) and give a proper jumping
 
-## Further work
-Deep Learning version is under development...
+## Machine Learning
+1. Use train.py to training your CNN neural network.
+2. Use predictor.py to predict delay value.
 
 ## EasterEgg: Use JS script to modify score directly
 [original source](https://gist.github.com/feix/6dd1f62a54c5efa10f1e1c24f8efc417)
@@ -55,6 +56,7 @@ node wx_t1t_hack.js
 
 Update:
 * 100% automation and support simulating of learning curve
+* self-adaption of phone resolution
 ---------------------
 * referer version：5->6
 * data version: 1->2
@@ -96,8 +98,11 @@ for i in range(0, 5):   # default jump 5 rounds
 ## 工作原理
 脚本用adb获取屏幕截图并计算瓶子和目标物体中心的距离，换算成起跳时间
 
-## 未来计划
-机器学习（强化学习）版正在开发中，敬请期待...
+## 机器学习模式
+机器学习（CNN）版已经可以开始训练了。
+1. 使用training.py训练
+2. 使用predictor.py进行预测
+
 
 ## 彩蛋：使用脚本直接修改分数
 [原始代码](https://gist.github.com/feix/6dd1f62a54c5efa10f1e1c24f8efc417)
@@ -128,6 +133,7 @@ node wx_t1t_hack.js
 
 更新:
 * 实现完全自动化和模拟学习曲线
+* 自适应屏幕的分辨率
 ---------------------
 * referer版本：5->6
 * 数据版本: 1->2
