@@ -1,4 +1,7 @@
 # screenshot file
+.DS_Store
+MNIST-data/
+model/
 screenshot.png
 .idea
 

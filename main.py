@@ -21,6 +21,9 @@ def get_height():
 
 
 def call_cmd(cmd):
+    # ps = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    # output = ps.communicate()[0]
+    # return output.decode("utf-8").split('\n')
     s = subprocess.check_output(cmd.split())
     return s.decode("utf-8").split('\n')
 
@@ -66,7 +69,7 @@ def jump(self_kill=False):
     distance = pow(distance_2, 0.5)
     print("Distance is {}".format(distance))
     # delay = int(distance/540*806)
-    delay = int(distance / 540 * (755*coefficient))  # change to your value properly, 1080*1920=>755
+    delay = int(distance / 540 * (745*coefficient))  # change to your value properly, 1080*1920=>755
     x1 = round(random.randint(100, 500) + random.random(), 3)
     y1 = round(random.randint(100, 500) + random.random(), 3)
     x2 = round(x1 + random.random(), 3)
@@ -111,7 +114,9 @@ def main():
     global fig
     global click_data
     cmd = [
-        'adb shell screencap -p /sdcard/screenshot.png',
+        "bash get_screenshot.sh",
+        # "adb shell screencap -p | sed 's/\r$//' > screen.png", # for ubuntu
+        # 'adb shell screencap -p /sdcard/screenshot.png',
         'adb pull /sdcard/screenshot.png',
     ]
     while True:
@@ -123,7 +128,7 @@ def main():
         click_data = []
         if not debug:
             call_cmd(cmd[0])
-            call_cmd(cmd[1])
+            # call_cmd(cmd[1])
         screenshot = mpimg.imread('screenshot.png')
         print(screenshot.shape)
 
@@ -180,7 +185,7 @@ def main():
             # restart game
             call_cmd("adb shell input tap %s %s" % (random.randint(int(400/coefficient), int(700/coefficient)),
                                                     random.randint(int(1500/coefficient), int(1600/coefficient))))
-            plt.pause(5)
+            plt.pause(4)
             plt.close()
         plt.show()
 
